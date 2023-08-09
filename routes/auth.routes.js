@@ -6,6 +6,20 @@ const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 const mongoose = require('mongoose')
 
+// MIDDLEWARE
+//////////// M A I N ///////////
+router.get('/main', (req, res) => {
+    res.render('users/main', { userInSession: req.session.currentUser });
+});
+
+
+//////////// P R I V A T E ///////////
+router.get('/private', (req, res) => {
+    console.log(req.session.currentUser);
+    res.render('users/private', { userInSession: req.session.currentUser });
+});
+
+
 // --------------------- ALL THE ROUTES HERE ---------------------
 router.get("/signup", (req, res, next) => {
     res.render("auth/signup");
@@ -61,7 +75,6 @@ router.post("/signup", (req, res, next) => {
 })
 
 router.get('/userProfile', (req, res) => {
-    console.log(req.session.currentUser);
     res.render('users/user-profile', { userInSession: req.session.currentUser });
 });
 
